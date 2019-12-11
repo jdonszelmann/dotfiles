@@ -1,0 +1,6 @@
+[user]
+	name = jonay2000
+	email = jonabent@gmail.com
+	signingkey = E0C1EA36407B2FF2
+[commit]
+	gpgsign = true

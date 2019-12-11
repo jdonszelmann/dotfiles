@@ -1,0 +1,3 @@
+#!/bin/bash
+
+alacritty -e sh -c "sudo pacman -Syu && echo "Done!" && sleep infinity" 

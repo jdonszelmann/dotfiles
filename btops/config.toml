@@ -1,0 +1,42 @@
+remove-empty = true
+append-when-occupied = true
+watch-config = true
+min=5
+max=10
+renamers = ["classified", "client", "constant"]
+
+[names]
+constant = ""
+
+[[names.classified]]
+""= ["Firefox", "firefox"]
+
+[[names.classified]]
+"ﭮ" = ["discord"]
+
+[[names.classified]]
+"" = ["jetbrains-goland","jetbrains-idea", "jetbrains-pycharm", "jetbrains-clion"]
+
+[[names.classified]]
+"" = ["Alacritty"]
+
+[[names.classified]]
+"" = ["Thunar"]
+
+
+[[names.classified]]
+"" = ["Spotify", "Spotify Premium", "spotify"]
+
+[[names.classified]]
+"" = ["Pavucontrol"]
+
+[[names.classified]]
+"" = ["Nm-connection-editor"]
+
+[[names.classified]]
+"" = ["Steam"]
+
+[[names.classified]]
+"" = ["GParted"]
+
+
