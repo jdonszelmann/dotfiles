@@ -1,0 +1,7 @@
+#!/bin/bash
+
+while true; do
+    bspc subscribe monitor_geometry | head -1 # wait for resize event
+    notify-send "Resize detected, updating!"
+    $HOME/.config/polybar/launch
+done

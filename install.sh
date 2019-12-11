@@ -4,6 +4,7 @@ stow -v -R -t ~/.config/polybar polybar
 stow -v -R -t ~/.config/autorandr autorandr
 stow -v -R -t ~/.config/nvim nvim
 stow -v -R -t ~/.config/alacritty alacritty
+stow -v -R -t ~/.config/bspwm bspwm
 stow -v -R -t ~/.config/rofi rofi
 stow -v -R -t ~/.config/dunst dunst
 stow -v -R -t ~/.config/wal wal
