@@ -6,7 +6,7 @@ max=10
 renamers = ["classified", "client", "constant"]
 
 [names]
-constant = ""
+constant = " "
 
 [[names.classified]]
 ""= ["Firefox", "firefox"]
