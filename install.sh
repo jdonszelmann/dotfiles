@@ -12,3 +12,4 @@ stow -v -R -t ~/.config/btops btops
 stow -v -R -t ~ zsh
 sudo stow -v -R -t /etc pacman
 sudo stow -v -R -t ~ x
+sudo stow -v -R -t /etc/systemd/system services

@@ -22,7 +22,6 @@ set clipboard=unnamedplus
 let g:suda_smart_edit = 1
 filetype plugin indent on
 
-
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
@@ -125,3 +124,8 @@ augroup my_cmdline
 augroup END
 
 
+" Disable arrow keys
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
