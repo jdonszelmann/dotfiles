@@ -7,7 +7,7 @@ xsetroot -cursor_name left_ptr
 
 xinput --set-prop bcm5974 "libinput Natural Scrolling Enabled" 1
 
-export $_JAVA_AWT_WM_NONREPARENTING=1
+#export $_JAVA_AWT_WM_NONREPARENTING=1
 
 #disable slow starting of gnome apps
 dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
@@ -48,4 +48,4 @@ picom &
 $HOME/.config/bspwm/resize &
 
 # Remap caps lock to escape
-setxkbmap -option caps:escape
+setxkbmap -option caps:swapescape

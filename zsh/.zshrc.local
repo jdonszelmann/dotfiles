@@ -173,6 +173,7 @@ alias open="xdg-open"
 alias o="xdg-open"
 alias polybar-reload="$HOME/.config/polybar/launch"
 
+
 temp(){
     cd `mktemp -d`
 }
@@ -216,5 +217,12 @@ source ~/.cache/wal/colors-tty.sh
 export PATH=$PATH:$HOME/bin
 
 export DOT=$HOME/dotfiles
+
+
+# ROS
+source /opt/ros/melodic/setup.zsh
+source ~/catkin_ws/devel/setup.zsh
+
+alias ros-clion="/opt/clion/bin/clion.sh"
 
 #END OF FILE #################################################################
