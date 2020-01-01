@@ -1,4 +1,4 @@
-remove-empty = true
+remove-empty = false
 append-when-occupied = true
 watch-config = true
 min=5
@@ -6,7 +6,7 @@ max=10
 renamers = ["classified", "client", "constant"]
 
 [names]
-constant = " "
+constant = ""
 
 [[names.classified]]
 ""= ["Firefox", "firefox"]

@@ -15,3 +15,7 @@ sudo stow -v -R -t /etc locale
 sudo stow -v -R -t /etc pacman
 sudo stow -v -R -t ~ x
 sudo stow -v -R -t /etc/systemd/system services
+sudo stow -v -R -t /etc/systemd/ systemd
+sudo stow -v -R -t /etc/X11/xorg.conf.d xinput
+sudo stow -v -R -t /etc/pacman.d/hooks pacmanhooks
+sudo stow -v -R -t /etc mkinitcpio

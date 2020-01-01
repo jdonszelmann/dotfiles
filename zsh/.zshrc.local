@@ -80,7 +80,7 @@ setopt nonomatch
 setopt NO_clobber
 
 ## don't warn me about bg processes when exiting
-#setopt nocheckjobs
+setopt nocheckjobs
 
 # alert me if something failed
 #setopt printexitvalue
@@ -172,7 +172,7 @@ alias clipboard="xclip -selection clipboard"
 alias open="xdg-open"
 alias o="xdg-open"
 alias polybar-reload="$HOME/.config/polybar/launch"
-
+alias zsteg="~/.gem/ruby/2.6.0/gems/zsteg-0.1.2/bin/zsteg"
 
 temp(){
     cd `mktemp -d`
@@ -182,7 +182,57 @@ export PATH="$HOME/.cargo/bin:$PATH"
 
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+# git
+
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$reset_color%}%{$fg[green]%}["
+ZSH_THEME_GIT_PROMPT_SUFFIX="]%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}*%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_CLEAN=""
+
+# show git branch/tag, or name-rev if on detached head
+parse_git_branch() {
+  (command git symbolic-ref -q HEAD || command git name-rev --name-only --no-undefined --always HEAD) 2>/dev/null
+}
+
+# show red star if there are uncommitted changes
+parse_git_dirty() {
+  if command git diff-index --quiet HEAD 2> /dev/null; then
+    echo "$ZSH_THEME_GIT_PROMPT_CLEAN"
+  else
+    echo "$ZSH_THEME_GIT_PROMPT_DIRTY"
+  fi
+}
+
+# if in a git repo, show dirty indicator + git branch
+git_custom_status() {
+  local git_where="$(parse_git_branch)"
+  [ -n "$git_where" ] && echo "$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_PREFIX${git_where#(refs/heads/|tags/)}$ZSH_THEME_GIT_PROMPT_SUFFIX"
+}
+
+
 # keys
+
+
+# vim mode
+bindkey -v
+
+bindkey '^P' up-history
+bindkey '^N' down-history
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
+bindkey '^r' history-incremental-search-backward
+
+function zle-line-init zle-keymap-select {
+    VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
+    RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}$(git_custom_status) $EPS1"
+    zle reset-prompt
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
+export KEYTIMEOUT=1
+
 #bindkey '	' autosuggest-accept
 
 extract () {
@@ -215,14 +265,16 @@ source ~/.cache/wal/colors-tty.sh
 
 # Add $HOME/bin to path
 export PATH=$PATH:$HOME/bin
+export PATH="$PATH:$(yarn global bin)"
+
 
 export DOT=$HOME/dotfiles
 
 
 # ROS
-source /opt/ros/melodic/setup.zsh
-source ~/catkin_ws/devel/setup.zsh
+#source /opt/ros/melodic/setup.zsh
+#source ~/catkin_ws/devel/setup.zsh
 
-alias ros-clion="/opt/clion/bin/clion.sh"
+#alias ros-clion="/opt/clion/bin/clion.sh"
 
 #END OF FILE #################################################################

@@ -2,7 +2,7 @@
 
 
 dbus-update-activation-environment --all
-xrandr --dpi 100
+#xrandr --dpi 100
 xsetroot -cursor_name left_ptr
 
 xinput --set-prop bcm5974 "libinput Natural Scrolling Enabled" 1

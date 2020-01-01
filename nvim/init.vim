@@ -14,6 +14,7 @@ Plug 'prettier/vim-prettier', {'branch': 'release/1.x', 'do': 'yarn install'}
 Plug 'lambdalisue/suda.vim'
 Plug 'crusoexia/vim-monokai'
 Plug 'scrooloose/nerdtree'
+Plug 'dhruvasagar/vim-table-mode'
 call plug#end()
 
 set clipboard=unnamedplus
