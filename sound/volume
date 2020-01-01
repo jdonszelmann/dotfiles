@@ -1,0 +1,61 @@
+#!/bin/bash
+
+getmute() {
+    read a <<< $(pacmd list-sinks | grep muted | awk '{print $2}')
+    if test $a = "yes"
+    then
+        return 0
+    else
+        return 1
+    fi
+}
+
+upvolume(){
+    for SINK in `pacmd list-sinks | grep 'index:' | cut -b12-`
+    do
+	    /usr/bin/pactl set-sink-volume $SINK +5%
+    done
+    
+    if getmute
+    then 
+        togglemute
+    fi
+	notify-send --hint=string:x-dunst-stack-tag:test "Volume" $(getvolume)
+}
+
+downvolume(){
+    for SINK in `pacmd list-sinks | grep 'index:' | cut -b12-`
+    do
+	    /usr/bin/pactl set-sink-volume $SINK -5%
+    done
+
+    if getmute
+    then 
+        togglemute
+    fi
+	notify-send --hint=string:x-dunst-stack-tag:test "Volume" $(getvolume)
+}
+
+togglemute(){
+    for SINK in `pacmd list-sinks | grep 'index:' | cut -b12-`
+    do
+        /usr/bin/pactl set-sink-mute $SINK toggle
+    done
+
+	if getmute
+    then 
+        notify-send --hint=string:x-dunst-stack-tag:test "Muted"
+    else
+        notify-send --hint=string:x-dunst-stack-tag:test "Unmuted" "$(getvolume)"
+    fi
+}
+
+getsink() {
+    pacmd list-sinks |
+        awk '/index:/{i++} /* index:/{print i; exit}'
+}
+
+getvolume() {
+    pacmd list-sinks |
+        awk '/^\svolume:/{i++} i=='$(getsink)'{print $5; exit}'
+}
