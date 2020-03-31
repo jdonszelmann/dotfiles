@@ -1,4 +1,4 @@
-remove-empty = false
+remove-empty = true
 append-when-occupied = true
 watch-config = true
 min=5

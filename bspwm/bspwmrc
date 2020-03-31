@@ -44,6 +44,8 @@ dunst &
 firefox &
 discord &
 picom &
+lxqt-policykit-agent &
+
 
 $HOME/.config/bspwm/resize &
 
