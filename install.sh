@@ -25,6 +25,7 @@ mkdir -p ~/bin
 stow -v -R -t ~/bin bin
 stow -v -R -t ~ borg
 
+stow -v -R -t ~/.config/systemd/user userservices
 
 stow -v -R -t ~/.config/sound sound
 stow -v -R -t ~ zsh

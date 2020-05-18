@@ -46,8 +46,20 @@ discord &
 picom &
 lxqt-policykit-agent &
 
+# Remap caps lock to escape
+setxkbmap -option caps:swapescape
+
+xinput set-prop \
+    $(xinput list --id-only "SYNA307B:00 06CB:CD46 Touchpad") \
+    "libinput Disable While Typing Enabled" 0
+
+libinput-gestures &
 
 $HOME/.config/bspwm/resize &
 
-# Remap caps lock to escape
-setxkbmap -option caps:swapescape
+# automatically lock after 1 minute
+xautolock -time 10 -locker slock &
+
+
+
+

@@ -15,9 +15,9 @@ upvolume(){
     do
 	    /usr/bin/pactl set-sink-volume $SINK +5%
     done
-    
+
     if getmute
-    then 
+    then
         togglemute
     fi
 	notify-send --hint=string:x-dunst-stack-tag:test "Volume" $(getvolume)
@@ -30,7 +30,7 @@ downvolume(){
     done
 
     if getmute
-    then 
+    then
         togglemute
     fi
 	notify-send --hint=string:x-dunst-stack-tag:test "Volume" $(getvolume)
@@ -43,7 +43,7 @@ togglemute(){
     done
 
 	if getmute
-    then 
+    then
         notify-send --hint=string:x-dunst-stack-tag:test "Muted"
     else
         notify-send --hint=string:x-dunst-stack-tag:test "Unmuted" "$(getvolume)"
@@ -59,3 +59,6 @@ getvolume() {
     pacmd list-sinks |
         awk '/^\svolume:/{i++} i=='$(getsink)'{print $5; exit}'
 }
+
+togglemic() {
+amixer set Capture toggle && amixer get Capture | grep '\[off\]' && notify-send "Microphone muted" || notify-send "Microphone unmuted"}

@@ -11,11 +11,11 @@ super + shift + Return
 
 # program launcher
 super + p
-    rofi -show combi -combi-modi "window,run" -modi combi -hide-scrollbar -font "DejaVuSansMono 12" -color-window "#222222, #222222, #b1b4b3"
+    rofi -show combi
 
 # program launcher
 super + l
-    bspc quit
+    slock
 
 # make sxhkd reload its configuration files:
 super + Escape
@@ -43,6 +43,9 @@ XF86AudioRaiseVolume
 XF86AudioMute
     source $HOME/.config/sound/volume && togglemute
     #pactl -- set-sink-mute 0 toggle
+
+XF86AudioMicMute
+    source $HOME/.config/sound/volume && togglemic
 
 # Backlight
 XF86MonBrightnessUp
