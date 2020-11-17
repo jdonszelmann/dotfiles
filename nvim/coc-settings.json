@@ -1,0 +1,12 @@
+{
+    "rust-analyzer": {
+        "enableCargoWatchOnStartup":true
+    },
+    "coc.preferences.rootPatterns": [".vim", ".git", ".hg", ".projections.json", "Cargo.toml", "Pipfile"],
+    "languageserver": {
+       "zls" : {
+           "command": "/usr/bin/zls",
+           "filetypes": ["zig"]
+       }
+   }
+}
