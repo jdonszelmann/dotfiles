@@ -1,0 +1,11 @@
+#!/bin/bash
+
+while true; do
+    bspc subscribe monitor_geometry | head -1 # wait for resize event
+    (\
+        sleep 2 && \
+        xinput map-to-output $(xinput list --id-only "Wacom HID 48D8 Finger") \
+            $(/usr/bin/xrandr --query |awk '/\<primary\>/{print $1}') \
+    ) &
+    notify-send "Resize detected, updating!"
+done

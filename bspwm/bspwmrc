@@ -1,0 +1,95 @@
+#!/bin/bash
+
+exec > /tmp/bspwm.log 2>&1
+
+export GTK_THEME=Arc
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+dbus-update-activation-environment --all
+xsetroot -cursor_name left_ptr
+xinput --set-prop "SYNA307B:00 06CB:CD46 Touchpad" "libinput Natural Scrolling Enabled" 0
+
+
+DISPLAYS=$(xrandr -q | grep -w connected | awk '{print $1;}')
+PRIMARY=$(xrandr -q | grep -w connected | grep primary | awk '{print $1;}')
+if [ -z "$PRIMARY" ]
+then
+    # Default display
+    PRIMARY="DP-0"
+fi
+
+OTHER=$(echo "$DISPLAYS" | grep -v "$PRIMARY")
+
+echo "disp: $DISPLAYS"
+echo "primary: $PRIMARY"
+echo "other: $OTHER"
+
+
+#disable slow starting of gnome apps
+dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
+
+
+~/.config/polybar/launch.sh
+
+killall -q sxhkd
+while pgrep -u $UID -x sxhkd >/dev/null; do sleep 1; done
+sxhkd &
+
+killall -q libinput-gestures 
+while pgrep -u $uid -x libinput-gestures >/dev/null; do sleep 1; done
+libinput-gestures &
+
+killall -q resize
+while pgrep -u $uid -x picom >/dev/null; do sleep 1; done
+$HOME/.config/bspwm/resize &
+
+
+nm-applet &
+
+killall -q lxsession
+while pgrep -u $uid -x lxsession >/dev/null; do sleep 1; done
+lxsession &
+
+
+
+
+
+killall -q picom
+while pgrep -u $uid -x picom >/dev/null; do sleep 1; done
+picom &
+
+set_wallpaper() {
+    wal -n --iterative -i $HOME/.config/backgrounds 
+    feh --bg-fill "$(< "${HOME}/.cache/wal/wal")"
+}
+
+set_wallpaper
+
+
+
+setxkbmap -option caps:escape -option compose:ralt
+
+bspc monitor "$PRIMARY" -d 1 2 3 4 5 6 7 8 9
+bspc monitor "$OTHER" -d "monitor"
+
+bspc config border_width 1
+bspc config window_gap 0
+
+bspc config split_ratio          0.52
+bspc config borderless_monocle   false
+bspc config gapless_monocle      false
+bspc config focus_follows_pointer true
+bspc config ignore_ewmh_focus true
+
+bspc rule -a "firefox" desktop='1'
+bspc rule -a "discord" desktop="3"
+bspc rule -a "polybar" border=off manage=off
+
+bspc config remove_unplugged_monitors true
+bspc config remove_disabled_monitors true
+bspc config merge_overlapping_monitors true
+
+# resize with mouse
+bspc config pointer_modifier mod4
+bspc config pointer_action1 move
+bspc config pointer_action2 resize_corner

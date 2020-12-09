@@ -1,0 +1,79 @@
+
+
+# Music Control
+super + slash
+	playerctl play-pause
+
+super + period
+    playerctl next
+
+super + comma
+    playerctl previous
+
+# Screenshot
+super + shift + s
+    maim -s | tee /tmp/screenshot-$(date --iso-8601=seconds).png | xclip -selection clipboard -t image/png
+
+
+# Sound
+
+{XF86AudioLowerVolume, XF86AudioRaiseVolume}
+    pactl set-sink-mute @DEFAULT_SINK@ false; \
+    pactl set-sink-volume @DEFAULT_SINK@ {-,+}3%; \
+    source "$HOME/.config/sxhkd/scripts.sh" && notifyVolume
+
+XF86AudioMute
+    pactl set-sink-mute @DEFAULT_SINK@ toggle; \
+    source "$HOME/.config/sxhkd/scripts.sh" && notifyMute
+
+XF86AudioMicMute
+   source "$HOME/.config/sxhkd/scripts.sh" && toggleMic
+
+# Quick launch
+super + p
+    rofi  -show
+
+super + Return
+	alacritty
+
+
+# Kill stuff
+super + Escape
+	pkill -USR1 -x sxhkd
+
+super + alt + {q,r}
+	bspc {quit,wm -r}
+
+super + {_,shift + }q
+	bspc node -{c,k}
+
+
+# Window modes
+
+super + {t,shift + t,s,f}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+super + m
+	bspc desktop -l next
+
+
+# Desktop selection
+
+super + {1-9,0}
+    bspc desktop -f '{1-9,monitor}'
+
+super + shift + {1-9,0}
+    source "$HOME/.config/sxhkd/scripts.sh" && moveWindow {1-9, monitor}
+
+
+alt + {_,shift + } Tab
+    bspc node -f {next,prev}
+
+super + Tab
+    bspc node -f last
+
+super + {Left,Down,Up,Right}
+    bspc node -z {left -50 0,bottom 0 50,top 0 -50,right 50 0}
+
+super + shift + {Left,Down,Up,Right}
+    bspc node -z {right -50 0,top 0 50,bottom 0 -50,left 50 0}

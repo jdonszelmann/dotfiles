@@ -38,7 +38,7 @@ set wildmenu
 set shell=$SHELL
 set modeline
 set cursorline
-set number
+set number relativenumber
 
 " syntax
 syntax enable
@@ -185,7 +185,7 @@ Plug 'fatih/vim-go'
 Plug 'dag/vim-fish'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
-
+Plug 'elixir-editors/vim-elixir'
 
 Plug 'airblade/vim-rooter'
 
