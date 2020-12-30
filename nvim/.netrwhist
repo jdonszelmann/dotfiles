@@ -1,0 +1,7 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =5
+let g:netrw_dirhist_5='/home/jonathan/src/aoc2020/src/day11'
+let g:netrw_dirhist_4='/home/jonathan/src/aoc2020/src'
+let g:netrw_dirhist_3='/home/jonathan/src/aoc2020'
+let g:netrw_dirhist_2='/home/jonathan/src/aoc2020/src'
+let g:netrw_dirhist_1='/home/jonathan/src/aoc2020/src/day11'
